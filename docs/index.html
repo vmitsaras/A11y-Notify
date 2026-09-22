@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A11y Notify — Demo</title>
+  <link rel="stylesheet" href="demo.css" />
+</head>
+<body>
+  <header>
+    <h1>A11y Notify</h1>
+    <p class="tagline">Accessible status announcements with <code>ariaNotify</code> and a live-region fallback.</p>
+    <p class="tagline">No framework. No visual notification UI.</p>
+  </header>
+
+  <main>
+    <section aria-labelledby="browser-status-heading">
+      <h2 id="browser-status-heading">ariaNotify API</h2>
+      <p id="api-status">Checking…</p>
+      <p class="note">API availability does not confirm screen-reader delivery.</p>
+    </section>
+
+    <section aria-labelledby="form-heading">
+      <h2 id="form-heading">Announce a message</h2>
+      <form id="announce-form" novalidate>
+        <div class="field">
+          <label for="message-input">Message</label>
+          <input
+            type="text"
+            id="message-input"
+            name="message"
+            value="Your changes were saved."
+            required
+            autocomplete="off"
+          />
+        </div>
+
+        <fieldset>
+          <legend>Priority</legend>
+          <label><input type="radio" name="priority" value="normal" checked /> Normal</label>
+          <label><input type="radio" name="priority" value="high" /> High</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Transport</legend>
+          <label><input type="radio" name="transport" value="auto" checked /> Auto — ariaNotify when available</label>
+          <label><input type="radio" name="transport" value="live-region" /> Live region — force fallback</label>
+        </fieldset>
+
+        <button type="submit" data-action="announce">Announce message</button>
+      </form>
+    </section>
+
+    <section aria-labelledby="scenarios-heading">
+      <h2 id="scenarios-heading">Demo scenarios</h2>
+      <ul class="scenario-list">
+        <li><button data-scenario="saved">Changes saved. (normal)</button></li>
+        <li><button data-scenario="error-normal">We couldn't save your preferences. Try again. (normal — error ≠ high priority)</button></li>
+        <li><button data-scenario="session">Your session has expired. (high priority)</button></li>
+        <li><button data-scenario="repeated">Item added. × 2 (repeated identical)</button></li>
+        <li><button data-scenario="force-fallback">Force live-region fallback</button></li>
+        <li><button data-scenario="destroy">Destroy and recreate notifier</button></li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="log-heading">
+      <h2 id="log-heading">Event log</h2>
+      <ol data-event-log></ol>
+    </section>
+  </main>
+
+  <script type="module" src="demo.js"></script>
+</body>
+</html>

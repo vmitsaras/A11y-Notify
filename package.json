@@ -1,0 +1,59 @@
+{
+  "name": "a11y-notify",
+  "version": "0.1.0",
+  "description": "A tiny framework-free ariaNotify utility with an accessible live-region fallback.",
+  "type": "module",
+  "license": "MIT",
+  "author": {
+    "name": "Vasileios Mitsaras",
+    "url": "https://www.linkedin.com/in/vasilis-mitsaras/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vmitsaras/A11y-Notify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vmitsaras/A11y-Notify/issues"
+  },
+  "homepage": "https://vmitsaras.github.io/A11y-Notify/",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./docs": {
+      "types": "./dist/docs.d.ts",
+      "import": "./dist/docs.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsdown && node scripts/fix-dts-entries.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:browser": "node scripts/browser-test.mjs",
+    "test:package": "node scripts/package-test.mjs",
+    "pack:check": "npm pack --dry-run",
+    "docs:build": "node scripts/copy-docs-build.mjs",
+    "docs:check": "node scripts/copy-docs-build.mjs --check"
+  },
+  "devDependencies": {
+    "tsdown": "^0.12.0",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.6",
+    "@vitest/coverage-v8": "^3.2.6",
+    "happy-dom": "^20.8.9",
+    "playwright": "^1.55.1",
+    "@changesets/cli": "^2.27.0"
+  }
+}
