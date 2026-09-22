@@ -7,8 +7,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, '..');
 const dist = resolve(root, 'dist');
 
+const files = readdirSync(dist);
 for (const entry of ['index', 'docs']) {
-  const files = readdirSync(dist);
   const dtsName = files.find((file) => new RegExp(`^${entry}-.*\\.d\\.ts$`).test(file));
   if (!dtsName) {
     console.error(`Missing declaration output for ${entry}.`);
