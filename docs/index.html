@@ -3,71 +3,235 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>A11y Notify — Demo</title>
+  <title>Accessible Status Announcement Demo | A11y Notify</title>
+  <meta
+    name="description"
+    content="Try a11y-notify with native document.ariaNotify support, a live-region fallback, priority controls, and lifecycle event logging."
+  />
+  <link rel="canonical" href="https://vmitsaras.github.io/A11y-Notify/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Accessible Status Announcement Demo | A11y Notify" />
+  <meta
+    property="og:description"
+    content="Try a11y-notify with native document.ariaNotify support, a live-region fallback, priority controls, and lifecycle event logging."
+  />
+  <meta property="og:url" content="https://vmitsaras.github.io/A11y-Notify/" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Accessible Status Announcement Demo | A11y Notify" />
+  <meta
+    name="twitter:description"
+    content="Try a11y-notify with native document.ariaNotify support, a live-region fallback, priority controls, and lifecycle event logging."
+  />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://vmitsaras.github.io/A11y-Notify/#webpage",
+      "url": "https://vmitsaras.github.io/A11y-Notify/",
+      "name": "Accessible Status Announcement Demo | A11y Notify",
+      "description": "Try a11y-notify with native document.ariaNotify support, a live-region fallback, priority controls, and lifecycle event logging.",
+      "isPartOf": {
+        "@id": "https://github.com/vmitsaras/A11y-Notify#repository"
+      },
+      "mainEntity": {
+        "@id": "https://vmitsaras.github.io/A11y-Notify/#software"
+      }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://vmitsaras.github.io/A11y-Notify/#software",
+      "name": "a11y-notify",
+      "description": "A tiny framework-free ariaNotify utility with an accessible live-region fallback.",
+      "codeRepository": "https://github.com/vmitsaras/A11y-Notify",
+      "programmingLanguage": [
+        "TypeScript",
+        "JavaScript"
+      ],
+      "runtimePlatform": "Browser",
+      "version": "0.1.0",
+      "license": "https://github.com/vmitsaras/A11y-Notify/blob/main/LICENSE",
+      "keywords": [
+        "accessibility",
+        "ariaNotify",
+        "live region",
+        "TypeScript",
+        "JavaScript"
+      ],
+      "author": {
+        "@id": "https://github.com/vmitsaras/#person"
+      },
+      "creator": {
+        "@id": "https://github.com/vmitsaras/#person"
+      },
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "Modern web browsers",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "runtimePlatform": "Browser"
+      },
+      "sameAs": [
+        "https://github.com/vmitsaras/A11y-Notify",
+        "https://www.npmjs.com/package/a11y-notify"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://github.com/vmitsaras/#person",
+      "name": "Vasileios Mitsaras",
+      "url": "https://github.com/vmitsaras/",
+      "sameAs": [
+        "https://github.com/vmitsaras/",
+        "https://linkedin.com/in/vasilis-mitsaras"
+      ]
+    }
+  ]
+}
+  </script>
   <link rel="stylesheet" href="demo.css" />
 </head>
 <body>
-  <header>
-    <h1>A11y Notify</h1>
-    <p class="tagline">Accessible status announcements with <code>ariaNotify</code> and a live-region fallback.</p>
-    <p class="tagline">No framework. No visual notification UI.</p>
+  <header class="hero">
+    <div class="hero__content">
+      <p class="eyebrow">Framework-free accessibility utility</p>
+      <h1>Announce dynamic status changes without building a toast system</h1>
+      <p class="hero__lede">
+        A11y Notify sends meaningful application feedback through <code>document.ariaNotify()</code> when available and falls back to hidden live regions when it is not.
+      </p>
+      <div class="hero__actions">
+        <a class="button button--primary" href="https://github.com/vmitsaras/A11y-Notify">View GitHub repository</a>
+        <a class="button button--secondary" href="https://www.npmjs.com/package/a11y-notify">Open npm package</a>
+      </div>
+    </div>
+
+    <aside class="hero__summary" aria-label="Package summary">
+      <dl class="package-facts">
+        <div>
+          <dt>Runtime</dt>
+          <dd>Browser</dd>
+        </div>
+        <div>
+          <dt>Dependencies</dt>
+          <dd>Zero runtime</dd>
+        </div>
+        <div>
+          <dt>Priority mapping</dt>
+          <dd><code>status</code> and <code>alert</code></dd>
+        </div>
+      </dl>
+    </aside>
   </header>
 
-  <main>
-    <section aria-labelledby="browser-status-heading">
-      <h2 id="browser-status-heading">ariaNotify API</h2>
-      <p id="api-status">Checking…</p>
-      <p class="note">API availability does not confirm screen-reader delivery.</p>
+  <main class="demo-layout">
+    <section class="panel panel--status" aria-labelledby="browser-status-heading">
+      <div>
+        <p class="section-kicker">Browser check</p>
+        <h2 id="browser-status-heading">ariaNotify API</h2>
+      </div>
+      <p class="status-pill" id="api-status">Checking...</p>
+      <p class="note">API availability does not confirm screen-reader delivery. This demo still lets you force the live-region fallback.</p>
     </section>
 
-    <section aria-labelledby="form-heading">
-      <h2 id="form-heading">Announce a message</h2>
-      <form id="announce-form" novalidate>
-        <div class="field">
-          <label for="message-input">Message</label>
-          <input
-            type="text"
-            id="message-input"
-            name="message"
-            value="Your changes were saved."
-            required
-            autocomplete="off"
-          />
+    <div class="demo-grid">
+      <section class="panel" aria-labelledby="form-heading">
+        <p class="section-kicker">Try it</p>
+        <h2 id="form-heading">Announce a message</h2>
+        <p>
+          Enter a short message, choose a priority, and submit it. The package either calls the native API or writes to the fallback region after a short delay.
+        </p>
+        <form id="announce-form" novalidate>
+          <div class="field">
+            <label for="message-input">Message</label>
+            <input
+              type="text"
+              id="message-input"
+              name="message"
+              value="Your changes were saved."
+              required
+              autocomplete="off"
+            />
+          </div>
+
+          <fieldset>
+            <legend>Priority</legend>
+            <label><input type="radio" name="priority" value="normal" checked /> Normal</label>
+            <label><input type="radio" name="priority" value="high" /> High</label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Transport</legend>
+            <label><input type="radio" name="transport" value="auto" checked /> Auto - ariaNotify when available</label>
+            <label><input type="radio" name="transport" value="live-region" /> Live region - force fallback</label>
+          </fieldset>
+
+          <button class="button button--primary" type="submit" data-action="announce">Announce message</button>
+        </form>
+      </section>
+
+      <section class="panel" aria-labelledby="scenarios-heading">
+        <p class="section-kicker">Compare cases</p>
+        <h2 id="scenarios-heading">Demo scenarios</h2>
+        <p>
+          Trigger common feedback patterns without changing focus. High priority maps to an alert live region only when the fallback is used.
+        </p>
+        <ul class="scenario-list">
+          <li><button data-scenario="saved">Changes saved <span>normal</span></button></li>
+          <li><button data-scenario="error-normal">Preference save failed <span>normal</span></button></li>
+          <li><button data-scenario="session">Session expired <span>high</span></button></li>
+          <li><button data-scenario="repeated">Item added twice <span>repeated</span></button></li>
+          <li><button data-scenario="force-fallback">Force live-region fallback</button></li>
+          <li><button data-scenario="destroy">Destroy and recreate notifier</button></li>
+        </ul>
+      </section>
+
+      <section class="panel panel--log" aria-labelledby="log-heading">
+        <div class="panel__header">
+          <div>
+            <p class="section-kicker">Inspect it</p>
+            <h2 id="log-heading">Event log</h2>
+          </div>
+          <p class="note">Shows request, announce, error, and destroy events from the current document.</p>
         </div>
-
-        <fieldset>
-          <legend>Priority</legend>
-          <label><input type="radio" name="priority" value="normal" checked /> Normal</label>
-          <label><input type="radio" name="priority" value="high" /> High</label>
-        </fieldset>
-
-        <fieldset>
-          <legend>Transport</legend>
-          <label><input type="radio" name="transport" value="auto" checked /> Auto — ariaNotify when available</label>
-          <label><input type="radio" name="transport" value="live-region" /> Live region — force fallback</label>
-        </fieldset>
-
-        <button type="submit" data-action="announce">Announce message</button>
-      </form>
-    </section>
-
-    <section aria-labelledby="scenarios-heading">
-      <h2 id="scenarios-heading">Demo scenarios</h2>
-      <ul class="scenario-list">
-        <li><button data-scenario="saved">Changes saved. (normal)</button></li>
-        <li><button data-scenario="error-normal">We couldn't save your preferences. Try again. (normal — error ≠ high priority)</button></li>
-        <li><button data-scenario="session">Your session has expired. (high priority)</button></li>
-        <li><button data-scenario="repeated">Item added. × 2 (repeated identical)</button></li>
-        <li><button data-scenario="force-fallback">Force live-region fallback</button></li>
-        <li><button data-scenario="destroy">Destroy and recreate notifier</button></li>
-      </ul>
-    </section>
-
-    <section aria-labelledby="log-heading">
-      <h2 id="log-heading">Event log</h2>
-      <ol data-event-log></ol>
-    </section>
+        <ol data-event-log></ol>
+      </section>
+    </div>
   </main>
+
+  <footer class="demo-footer" data-demo-footer>
+    <div class="demo-footer__inner">
+      <div class="demo-footer__brand">
+        <p class="demo-footer__eyebrow">Accessibility plugin demo</p>
+
+        <p class="demo-footer__credit">
+          <span class="demo-footer__plugin">A11y Notify</span>
+          <span class="demo-footer__separator" aria-hidden="true">&middot;</span>
+          Built by
+          <a class="demo-footer__link" href="https://github.com/vmitsaras/">Vasileios Mitsaras</a>
+          <span class="demo-footer__separator" aria-hidden="true">&middot;</span>
+          <a class="demo-footer__link" href="https://linkedin.com/in/vasilis-mitsaras">LinkedIn profile</a>
+        </p>
+
+        <p class="demo-footer__meta">
+          <span>a11y-notify</span>
+          <span class="demo-footer__separator" aria-hidden="true">&middot;</span>
+          <span>MIT License</span>
+        </p>
+      </div>
+
+      <nav class="demo-footer__nav" aria-label="Project links">
+        <ul class="demo-footer__links">
+          <li class="demo-footer__item">
+            <a class="demo-footer__link" href="https://github.com/vmitsaras/A11y-Notify">GitHub repository</a>
+          </li>
+          <li class="demo-footer__item">
+            <a class="demo-footer__link" href="https://www.npmjs.com/package/a11y-notify">npm package</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
 
   <script type="module" src="demo.js"></script>
 </body>
