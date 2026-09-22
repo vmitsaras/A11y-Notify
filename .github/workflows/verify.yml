@@ -1,0 +1,42 @@
+name: Verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
+
+      - name: Unit tests
+        run: npm test
+
+      - name: Docs build
+        run: npm run docs:build
+
+      - name: Docs freshness check
+        run: npm run docs:check
+
+      - name: Package exports check
+        run: npm run test:package
+
+      - name: Pack dry-run
+        run: npm run pack:check

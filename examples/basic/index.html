@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>a11y-notify — Basic Example</title>
+</head>
+<body>
+  <h1>a11y-notify basic example</h1>
+  <button id="btn-save">Save changes</button>
+  <button id="btn-session">Expire session</button>
+
+  <script type="module">
+    import { a11yNotify } from '../../dist/index.js';
+
+    document.getElementById('btn-save').addEventListener('click', () => {
+      a11yNotify('Changes saved.');
+    });
+
+    document.getElementById('btn-session').addEventListener('click', () => {
+      a11yNotify('Your session has expired.', { priority: 'high' });
+    });
+  </script>
+</body>
+</html>
